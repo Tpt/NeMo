@@ -202,7 +202,7 @@ Model Configuration
 -------------------
 
 Hydra is an open-source Python framework that simplifies configuration for complex applications
-that must bring together many different software libraries. Conversational AI is great examples of such an application.
+that must bring together many different software libraries. Conversational AI is a great example of such an application.
 To build a Conversational AI application, we must be able to configure the neural network architectures, training and optimization algorithms, 
 data pre/post processing, data augmentation, experiment logging/visualization, and model checkpointing.   
 
@@ -216,9 +216,12 @@ NeMo provides YAML configuration files for all of our `example <https://github.c
 YAML files make it easy to experiment with different model and training configurations.
 
 Every NeMo example YAML has the same underlying configuration structure: trainer, exp_manager, and model.
-Model configuration always contain train_ds, validation_ds, test_ds, and optim. 
+Model configurations contain train_ds, validation_ds, test_ds, and optim, as well as specifications for
+the model architecture being used.
 Model architectures vary across domains so please see the ASR, NLP, and TTS Collections documentation for 
-more detaied information on Model architecture configuration.
+more detailed information on Model architecture configuration.
+
+A NeMo configuration file should look something like this:
 
 .. code-block:: yaml
 
@@ -262,6 +265,10 @@ more detaied information on Model architecture configuration.
             ...
         decoder:
             ...
+
+More specific details about configuration files for each collection can be found on the following pages:
+
+* :doc:`asr/configs`
         
 CLI
 ~~~
