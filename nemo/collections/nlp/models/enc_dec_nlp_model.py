@@ -80,4 +80,3 @@ class EncDecNLPModel(NLPModel):
     @decoder.setter
     def decoder(self, decoder):
         self._decoder = decoder
-
