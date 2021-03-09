@@ -25,8 +25,9 @@ from nemo.core.classes.common import typecheck
 
 
 @dataclass
-class TransformerConfig:
+class NeMoTransformerConfig:
     # must be configured by the user
+    vocab_size: int = MISSING
     hidden_size: int = MISSING
     num_layers: int = MISSING
     inner_size: int = MISSING
@@ -47,11 +48,11 @@ class TransformerConfig:
 
 
 @dataclass
-class TransformerEncoderConfig(TransformerConfig):
+class NeMoTransformerEncoderConfig(NeMoTransformerConfig):
     mask_future: bool = False
 
 
-class TransformerEncoderNM(EncoderModule):
+class NeMoTransformerEncoderNM(EncoderModule):
     def __init__(
         self,
         vocab_size: int,
@@ -108,7 +109,7 @@ class TransformerEncoderNM(EncoderModule):
         return self._hidden_size
 
 
-class TransformerDecoderNM(DecoderModule):
+class NeMoTransformerDecoderNM(DecoderModule):
     def __init__(
         self,
         vocab_size: int,
