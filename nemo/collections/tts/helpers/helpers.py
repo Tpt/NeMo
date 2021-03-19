@@ -20,7 +20,6 @@ import matplotlib.pylab as plt
 import numpy as np
 import torch
 from numpy import ndarray
-from pesq import pesq
 from pystoi import stoi
 from pytorch_lightning.utilities import rank_zero_only
 
@@ -248,7 +247,6 @@ def eval_tts_scores(
     clean = y_clean[0, : T_ys[0]]
     estimated = y_est[0, : T_ys[0]]
     stoi_score = stoi(clean, estimated, sampling_rate, extended=False)
-    pesq_score = pesq(16000, np.asarray(clean), estimated, 'wb')
     ## fs was set 16,000, as pesq lib doesnt currently support felxible fs.
 
-    return {'STOI': stoi_score, 'PESQ': pesq_score}
+    return {'STOI': stoi_score, 'PESQ': 0}
