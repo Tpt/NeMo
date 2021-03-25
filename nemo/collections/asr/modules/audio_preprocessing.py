@@ -242,7 +242,7 @@ class AudioToMelSpectrogramPreprocessor(AudioPreprocessor, Exportable):
             pad_to=pad_to,
             frame_splicing=frame_splicing,
             stft_exact_pad=stft_exact_pad,
-            stft_conv=stft_conv,
+            stft_conv=True,  # TODO: hack to allow ONNX export
             pad_value=pad_value,
             mag_power=mag_power,
         )
