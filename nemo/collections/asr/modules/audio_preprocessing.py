@@ -18,6 +18,7 @@ from dataclasses import dataclass
 from typing import Any, Optional
 
 import torch
+from nemo.core import Exportable
 from packaging import version
 
 from nemo.collections.asr.parts.features import FilterbankFeatures
@@ -87,7 +88,7 @@ class AudioPreprocessor(NeuralModule, ABC):
         pass
 
 
-class AudioToMelSpectrogramPreprocessor(AudioPreprocessor):
+class AudioToMelSpectrogramPreprocessor(AudioPreprocessor, Exportable):
     """Featurizer module that converts wavs to mel spectrograms.
         We don't use torchaudio's implementation here because the original
         implementation is not the same, so for the sake of backwards-compatibility
@@ -252,6 +253,16 @@ class AudioToMelSpectrogramPreprocessor(AudioPreprocessor):
     @property
     def filter_banks(self):
         return self.featurizer.filter_banks
+
+    def input_example(self):
+        """
+        Generates input examples for tracing etc.
+        Returns:
+            A tuple of input examples.
+        """
+        input_example = torch.randn(1, 1024)
+        input_example_size = torch.tensor([1024])
+        return tuple([input_example, input_example_size])
 
 
 class AudioToMFCCPreprocessor(AudioPreprocessor):
